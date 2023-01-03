@@ -32,7 +32,7 @@ function App() {
 
 ```tsx
 function App() {
-  const { elementRef } = useResize<HTMLHeadingElement>({
+  const { elementRef, isWidthOverflowed, isHeightOverflowed } = useResize<HTMLHeadingElement>({
     onResize: () => {
       // ...
     },
