@@ -1,10 +1,24 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import type { ElementSizeOverflow, UseResizeProps } from './types';
+export type UseResizeProps = {
+  onResize: ResizeObserverCallback;
+  options?: {
+    box?: ResizeObserverBoxOptions;
+    enableOverflow?: boolean;
+  };
+};
+
+export type ElementSizeOverflow = {
+  width: boolean;
+  height: boolean;
+};
 
 const useResize = <T extends Element>({
   onResize,
-  box = 'border-box',
+  options = {
+    box: 'border-box',
+    enableOverflow: false,
+  },
 }: UseResizeProps) => {
   const elementRef = useRef<T>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -14,9 +28,8 @@ const useResize = <T extends Element>({
   });
 
   const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
-    if (elementRef.current) {
-      const { scrollWidth, scrollHeight, clientWidth, clientHeight } =
-        elementRef.current;
+    if (options.enableOverflow && elementRef.current) {
+      const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
       const isWidthOverflowed = scrollWidth > clientWidth;
       const isHeightOverflowed = scrollHeight > clientHeight;
 
@@ -32,7 +45,7 @@ const useResize = <T extends Element>({
   useLayoutEffect(() => {
     if (!elementRef || !elementRef.current) return;
     resizeObserverRef.current = new ResizeObserver(handleResizeCallback);
-    resizeObserverRef.current.observe(elementRef.current, { box });
+    resizeObserverRef.current.observe(elementRef.current, { box: options.box });
   }, []);
 
   useEffect(() => {
@@ -40,7 +53,7 @@ const useResize = <T extends Element>({
       resizeObserverRef.current?.disconnect();
       resizeObserverRef.current = null;
     };
-  });
+  }, []);
 
   return {
     elementRef,
