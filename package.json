@@ -1,0 +1,42 @@
+{
+  "name": "react-use-resize",
+  "description": "Detect resize event of element with using Resize Observer API",
+  "version": "1.0.0",
+  "type": "module",
+  "author": "mugglim <applewodnr@naver.com>",
+  "keywords": [
+    "react",
+    "hook",
+    "resize",
+    "Resize Observer",
+    "overflow"
+  ],
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "scripts": {
+    "build": "yarn build:cjs && yarn build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "prettier": "^2.8.1",
+    "react": "^17",
+    "react-dom": "^17",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4 || ^17.0.0"
+  },
+  "license": "MIT"
+}
