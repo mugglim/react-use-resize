@@ -27,7 +27,7 @@ const useResize = <T extends Element>({
     height: false,
   });
 
-  const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
+  const checkElementIsOverflowed = () => {
     if (options.enableOverflow && elementRef.current) {
       const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
       const isWidthOverflowed = scrollWidth > clientWidth;
@@ -38,7 +38,10 @@ const useResize = <T extends Element>({
         height: isHeightOverflowed,
       });
     }
+  };
 
+  const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
+    checkElementIsOverflowed();
     onResize(entry, observer);
   };
 
