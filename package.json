@@ -1,7 +1,7 @@
 {
   "name": "react-use-resize",
   "description": "Detect resize event of element with using Resize Observer API",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "author": "mugglim <applewodnr@naver.com>",
   "keywords": [
@@ -14,8 +14,8 @@
   "files": [
     "dist/"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "require": "./dist/cjs/index.js",
@@ -23,7 +23,7 @@
     }
   },
   "scripts": {
-    "build": "yarn build:cjs && yarn build:esm",
+    "build": "rm -rf dist && yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json"
   },

@@ -5,8 +5,9 @@
     "lib": ["esnext", "DOM"],
     "strict": true,
     "esModuleInterop": true,
-    "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "allowJs": true,
+    "outDir": "dist"
   },
-  "include": ["src"]
+  "include": ["./src"]
 }
