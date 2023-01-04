@@ -7,3 +7,5 @@
 ## To know
 
 -
+
+closed #{issue_number}
