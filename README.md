@@ -79,7 +79,7 @@ type UseResizeProps = {
 ### Returns
 
 ```tsx
-type Returns = {
+type Returns<T extends Element> = {
   /**
    * Element is observed by ResizeObserver instance
    */
