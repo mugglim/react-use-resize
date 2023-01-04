@@ -51,8 +51,52 @@ function App() {
 
 ## API Guides
 
-- `To be updated...`
+### Options
 
-### License
+```typescript
+type UseResizeProps = {
+  /**
+   * Callback function will be triggered after resize event
+   */
+  onResize: ResizeObserverCallback;
+
+  /**
+   * Custom options
+   */
+  options?: {
+    /**
+     * ResizeObserverBoxOptions ex) 'border-'box'
+     */
+    box?: ResizeObserverBoxOptions;
+    /**
+     * Enable checking element is overflowed
+     */
+    enableOverflow?: boolean;
+  };
+};
+```
+
+### Returns
+
+```tsx
+type Returns = {
+  /**
+   * Element is observed by ResizeObserver instance
+   */
+  elementRef: React.RefObject<T>;.
+
+  /**
+   * The value is for checking width of element is overflowed
+   */
+  isWidthOverflowed: boolean;
+
+  /**
+   * The value is for checking height of element is overflowed
+   */
+  isHeightOverflowed: boolean;
+};
+```
+
+## License
 
 MIT
