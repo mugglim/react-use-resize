@@ -1,7 +1,7 @@
 {
   "name": "react-use-resize",
   "description": "Detect resize event of element with using Resize Observer API",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "author": "mugglim <applewodnr@naver.com>",
   "keywords": [
