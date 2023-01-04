@@ -23,17 +23,33 @@
     }
   },
   "scripts": {
+    "setup:husky": "husky install",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint:eslint": "eslint --quiet 'src/**/*.{ts,tsx}'",
+    "lint:prettier": "prettier --check 'src/**/*.{ts,tsx}'",
     "build": "rm -rf dist && yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.0",
+    "@commitlint/config-conventional": "^17.4.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^26.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.1",
     "react": "^17",
     "react-dom": "^17",
-    "typescript": "^4.9.3"
+    "typescript": "*"
   },
   "peerDependencies": {
     "react": "^16.8.4 || ^17.0.0"

@@ -27,17 +27,20 @@ const useResize = <T extends Element>({
     height: false,
   });
 
-  const checkElementIsOverflowed = () => {
-    if (options.enableOverflow && elementRef.current) {
-      const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
-      const isWidthOverflowed = scrollWidth > clientWidth;
-      const isHeightOverflowed = scrollHeight > clientHeight;
+  const isOverflowCheckEnabled = options.enableOverflow && elementRef.current;
+  const isElementMounted = elementRef && elementRef.current;
 
-      setElementOverFlow({
-        width: isWidthOverflowed,
-        height: isHeightOverflowed,
-      });
-    }
+  const checkElementIsOverflowed = () => {
+    if (!isOverflowCheckEnabled) return;
+
+    const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
+    const isWidthOverflowed = scrollWidth > clientWidth;
+    const isHeightOverflowed = scrollHeight > clientHeight;
+
+    setElementOverFlow({
+      width: isWidthOverflowed,
+      height: isHeightOverflowed,
+    });
   };
 
   const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
@@ -46,7 +49,8 @@ const useResize = <T extends Element>({
   };
 
   useLayoutEffect(() => {
-    if (!elementRef || !elementRef.current) return;
+    if (!isElementMounted) return;
+
     resizeObserverRef.current = new ResizeObserver(handleResizeCallback);
     resizeObserverRef.current.observe(elementRef.current, { box: options.box });
   }, []);
