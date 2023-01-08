@@ -1,17 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-export type UseResizeProps = {
-  onResize: ResizeObserverCallback;
-  options?: {
-    box?: ResizeObserverBoxOptions;
-    enableOverflow?: boolean;
-  };
-};
-
-export type ElementSizeOverflow = {
-  width: boolean;
-  height: boolean;
-};
+import type { UseResizeProps, ElementSizeOverflow } from './types';
 
 const useResize = <T extends Element>({
   onResize,
