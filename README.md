@@ -72,6 +72,11 @@ type UseResizeProps = {
      * Enable checking element is overflowed
      */
     enableOverflow?: boolean;
+
+    /**
+     * Debounce onResize callback. (default delay is 0)
+     */
+    debounceDelay?: number;
   };
 };
 ```
