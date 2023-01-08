@@ -1,7 +1,7 @@
 {
   "name": "react-use-resize",
   "description": "Detect resize event of element with using Resize Observer API",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "author": "mugglim <applewodnr@naver.com>",
   "keywords": [
@@ -12,8 +12,9 @@
     "overflow"
   ],
   "files": [
-    "dist/"
+    "dist"
   ],
+  "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "exports": {
