@@ -14,12 +14,12 @@
   "files": [
     "dist/"
   ],
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
@@ -27,9 +27,7 @@
     "lint": "yarn lint:eslint && yarn lint:prettier",
     "lint:eslint": "eslint --quiet 'src/**/*.{ts,tsx}'",
     "lint:prettier": "prettier --check 'src/**/*.{ts,tsx}'",
-    "build": "rm -rf dist && yarn build:cjs && yarn build:esm",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json"
+    "build": "yarn tsup --dts"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
@@ -49,6 +47,7 @@
     "prettier": "^2.8.1",
     "react": "^17",
     "react-dom": "^17",
+    "tsup": "^6.5.0",
     "typescript": "*"
   },
   "peerDependencies": {

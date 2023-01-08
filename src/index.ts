@@ -1,23 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { checkIsElementOverflowed } from './utils';
+import { useDebounce } from './hooks';
 
-export type UseResizeProps = {
-  onResize: ResizeObserverCallback;
-  options?: {
-    box?: ResizeObserverBoxOptions;
-    enableOverflow?: boolean;
-  };
-};
-
-export type ElementSizeOverflow = {
-  width: boolean;
-  height: boolean;
-};
+import type { UseResizeProps, ElementSizeOverflow } from './types';
 
 const useResize = <T extends Element>({
   onResize,
   options = {
     box: 'border-box',
     enableOverflow: false,
+    debounceDelay: 0,
   },
 }: UseResizeProps) => {
   const elementRef = useRef<T>(null);
@@ -27,23 +19,21 @@ const useResize = <T extends Element>({
     height: false,
   });
 
-  const checkElementIsOverflowed = () => {
+  const debouncedOnResize = useDebounce(onResize, options.debounceDelay);
+
+  const checkOverflow = () => {
     const isOverflowCheckEnabled = options.enableOverflow && elementRef.current;
     if (!isOverflowCheckEnabled) return;
 
-    const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
-    const isWidthOverflowed = scrollWidth > clientWidth;
-    const isHeightOverflowed = scrollHeight > clientHeight;
-
     setElementOverFlow({
-      width: isWidthOverflowed,
-      height: isHeightOverflowed,
+      width: checkIsElementOverflowed(elementRef.current),
+      height: checkIsElementOverflowed(elementRef.current, 'height'),
     });
   };
 
   const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
-    checkElementIsOverflowed();
-    onResize(entry, observer);
+    checkOverflow();
+    debouncedOnResize(entry, observer);
   };
 
   useLayoutEffect(() => {

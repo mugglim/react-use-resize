@@ -10,6 +10,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["example", "**/*.config.ts"],
   "plugins": ["react"],
   "rules": {
     "no-console": "error",
