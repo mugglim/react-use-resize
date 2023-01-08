@@ -27,10 +27,8 @@ const useResize = <T extends Element>({
     height: false,
   });
 
-  const isOverflowCheckEnabled = options.enableOverflow && elementRef.current;
-  const isElementMounted = elementRef && elementRef.current;
-
   const checkElementIsOverflowed = () => {
+    const isOverflowCheckEnabled = options.enableOverflow && elementRef.current;
     if (!isOverflowCheckEnabled) return;
 
     const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
@@ -49,15 +47,18 @@ const useResize = <T extends Element>({
   };
 
   useLayoutEffect(() => {
-    if (!isElementMounted) return;
+    const resizeObserverTarget = elementRef.current;
+    if (!resizeObserverTarget) return;
 
     resizeObserverRef.current = new ResizeObserver(handleResizeCallback);
-    resizeObserverRef.current.observe(elementRef.current, { box: options.box });
+    resizeObserverRef.current.observe(resizeObserverTarget, { box: options.box });
   }, []);
 
   useEffect(() => {
     return () => {
-      resizeObserverRef.current?.disconnect();
+      if (!resizeObserverRef.current) return;
+
+      resizeObserverRef.current.disconnect();
       resizeObserverRef.current = null;
     };
   }, []);
