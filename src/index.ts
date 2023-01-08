@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { checkIsElementOverflowed } from './utils';
 
 import type { UseResizeProps, ElementSizeOverflow } from './types';
 
@@ -16,22 +17,18 @@ const useResize = <T extends Element>({
     height: false,
   });
 
-  const checkElementIsOverflowed = () => {
+  const checkOverflow = () => {
     const isOverflowCheckEnabled = options.enableOverflow && elementRef.current;
     if (!isOverflowCheckEnabled) return;
 
-    const { scrollWidth, scrollHeight, clientWidth, clientHeight } = elementRef.current;
-    const isWidthOverflowed = scrollWidth > clientWidth;
-    const isHeightOverflowed = scrollHeight > clientHeight;
-
     setElementOverFlow({
-      width: isWidthOverflowed,
-      height: isHeightOverflowed,
+      width: checkIsElementOverflowed(elementRef.current),
+      height: checkIsElementOverflowed(elementRef.current, 'height'),
     });
   };
 
   const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
-    checkElementIsOverflowed();
+    checkOverflow();
     onResize(entry, observer);
   };
 
