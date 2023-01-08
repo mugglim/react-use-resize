@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { checkIsElementOverflowed } from './utils';
+import { useDebounce } from './hooks';
 
 import type { UseResizeProps, ElementSizeOverflow } from './types';
 
@@ -8,6 +9,7 @@ const useResize = <T extends Element>({
   options = {
     box: 'border-box',
     enableOverflow: false,
+    debounceDelay: 0,
   },
 }: UseResizeProps) => {
   const elementRef = useRef<T>(null);
@@ -16,6 +18,8 @@ const useResize = <T extends Element>({
     width: false,
     height: false,
   });
+
+  const debouncedOnResize = useDebounce(onResize, options.debounceDelay);
 
   const checkOverflow = () => {
     const isOverflowCheckEnabled = options.enableOverflow && elementRef.current;
@@ -29,7 +33,7 @@ const useResize = <T extends Element>({
 
   const handleResizeCallback: ResizeObserverCallback = (entry, observer) => {
     checkOverflow();
-    onResize(entry, observer);
+    debouncedOnResize(entry, observer);
   };
 
   useLayoutEffect(() => {

@@ -3,6 +3,7 @@ export type UseResizeProps = {
   options?: {
     box?: ResizeObserverBoxOptions;
     enableOverflow?: boolean;
+    debounceDelay?: number;
   };
 };
 
