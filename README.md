@@ -13,6 +13,8 @@ yarn add react-use-resize
 ## Examples
 
 ```tsx
+import useResize from 'react-use-resize';
+
 function App() {
   const { elementRef } = useResize<HTMLHeadingElement>({
     onResize: () => {
@@ -31,6 +33,8 @@ function App() {
 ### With checking element is overflowed
 
 ```tsx
+import useResize from 'react-use-resize';
+
 function App() {
   const { elementRef, isWidthOverflowed, isHeightOverflowed } = useResize<HTMLHeadingElement>({
     onResize: () => {
