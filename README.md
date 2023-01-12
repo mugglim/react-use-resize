@@ -1,6 +1,6 @@
 # react-use-resize
 
-> **react-use-resize** is a custom hook for detecting element is resized.
+<img src="./assets/main.png">
 
 ## Getting started
 
