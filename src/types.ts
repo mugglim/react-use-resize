@@ -1,10 +1,9 @@
-export type UseResizeProps = {
-  onResize: ResizeObserverCallback;
-  options?: {
-    box?: ResizeObserverBoxOptions;
-    enableOverflow?: boolean;
-    debounceDelay?: number;
-  };
+export type OnResize = ResizeObserverCallback;
+
+export type Options = {
+  box?: ResizeObserverBoxOptions;
+  enableOverflow?: boolean;
+  debounceDelay?: number;
 };
 
 export type ElementSizeOverflow = {
