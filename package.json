@@ -1,9 +1,10 @@
 {
   "name": "react-use-resize",
   "description": "Detect resize event of element with using Resize Observer API",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "author": "mugglim <applewodnr@naver.com>",
+  "repository": "https://github.com/mugglim/react-use-resize",
   "keywords": [
     "react",
     "hook",
