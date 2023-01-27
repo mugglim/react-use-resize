@@ -16,10 +16,8 @@ yarn add react-use-resize
 import useResize from 'react-use-resize';
 
 function App() {
-  const { elementRef } = useResize<HTMLHeadingElement>({
-    onResize: () => {
-      // ...
-    },
+  const { elementRef } = useResize<HTMLHeadingElement>(() => {
+    // ... onResize logic
   });
 
   return (
@@ -36,14 +34,15 @@ function App() {
 import useResize from 'react-use-resize';
 
 function App() {
-  const { elementRef, isWidthOverflowed, isHeightOverflowed } = useResize<HTMLHeadingElement>({
-    onResize: () => {
-      // ...
+  const { elementRef, isWidthOverflowed, isHeightOverflowed } = useResize<HTMLHeadingElement>(
+    () => {
+      // ... onResize logic
     },
-    options: {
+    {
+      // Set enableOverflow to true!
       enableOverflow: true,
     },
-  });
+  );
 
   return (
     <div>
@@ -55,33 +54,41 @@ function App() {
 
 ## API Guides
 
-### Options
+### Parameters
 
 ```typescript
-type UseResizeProps = {
-  /**
-   * Callback function will be triggered after resize event
-   */
-  onResize: ResizeObserverCallback;
+/**
+ * Callback function when element is resize.
+ */
+export type OnResize = ResizeObserverCallback;
 
+/**
+ * Options for useResize hook
+ */
+export type Options = {
   /**
-   * Custom options
+   * Options Resize Observer API  BOx options
    */
-  options?: {
-    /**
-     * ResizeObserverBoxOptions ex) 'border-'box'
-     */
-    box?: ResizeObserverBoxOptions;
-    /**
-     * Enable checking element is overflowed
-     */
-    enableOverflow?: boolean;
+  box?: ResizeObserverBoxOptions;
+  /**
+   * Option for elements is overflowed.
+   */
+  enableOverflow?: boolean;
+  /**
+   * Delay for onResize callback function
+   */
+  debounceDelay?: number;
+};
 
-    /**
-     * Debounce onResize callback. (default delay is 0)
-     */
-    debounceDelay?: number;
-  };
+export type ElementSizeOverflow = {
+  /**
+   * Boolean for checking width is overflowed
+   */
+  width: boolean;
+  /**
+   * Boolean for checking height is overflowed
+   */
+  height: boolean;
 };
 ```
 
