@@ -2,16 +2,23 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { checkIsElementOverflowed } from './utils';
 import { useDebounce } from './hooks';
 
-import type { UseResizeProps, ElementSizeOverflow } from './types';
+import type { OnResize, Options, ElementSizeOverflow } from './types';
 
-const useResize = <T extends Element>({
-  onResize,
-  options = {
+/**
+ *
+ * @description React Hook for checking element is resized
+ * @param
+ * - onResize: (Required) Callback function when element is resize.
+ * - options: (Optional) Options for useResize hook
+ */
+const useResize = <T extends Element>(
+  onResize: OnResize,
+  options: Options = {
     box: 'border-box',
     enableOverflow: false,
     debounceDelay: 0,
   },
-}: UseResizeProps) => {
+) => {
   const elementRef = useRef<T>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const [elementOverflow, setElementOverFlow] = useState<ElementSizeOverflow>({

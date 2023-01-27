@@ -5,11 +5,12 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(-1);
-  const { elementRef } = useResize<HTMLTextAreaElement>({
-    onResize: () => {
-      setCount((prev) => prev + 1);
-    },
-  });
+
+  const onResize = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  const { elementRef } = useResize<HTMLTextAreaElement>(onResize);
 
   return (
     <div className="App">
