@@ -4,6 +4,13 @@ import { useDebounce } from './hooks';
 
 import type { OnResize, Options, ElementSizeOverflow } from './types';
 
+/**
+ *
+ * @description React Hook for checking element is resized
+ * @param
+ * - onResize: (Required) Callback function when element is resize.
+ * - options: (Optional) Options for useResize hook
+ */
 const useResize = <T extends Element>(
   onResize: OnResize,
   options: Options = {
